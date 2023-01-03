@@ -1,0 +1,17 @@
+AllCops:
+  DisplayCopNames: true
+  TargetRubyVersion: 2.7.6
+  NewCops: enable
+
+Style/FrozenStringLiteralComment:
+  Enabled: false
+
+Layout/IndentationConsistency:
+  Enabled: true
+  EnforcedStyle: indented_internal_methods
+
+Style/BlockComments:
+  Enabled: false
+
+Style/Documentation:
+  Enabled: false
