@@ -1,6 +1,6 @@
 class Dealer
-  AVAILABLE_MODELS = %w[corolla focus mondeo]
-  AVAILABLE_CITIES = %w[paris london warsaw]
+  AVAILABLE_MODELS = %w[corolla focus mondeo].freeze
+  AVAILABLE_CITIES = %w[paris london warsaw].freeze
 
   include Dry::Monads[:result]
 
@@ -14,11 +14,11 @@ class Dealer
 
   private
 
-  def model_available?(model)
-    AVAILABLE_MODELS.include?(model)
-  end
+    def model_available?(model)
+      AVAILABLE_MODELS.include?(model)
+    end
 
-  def city_available?(city)
-    AVAILABLE_CITIES.include?(city)
-  end
+    def city_available?(city)
+      AVAILABLE_CITIES.include?(city)
+    end
 end

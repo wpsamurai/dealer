@@ -5,7 +5,7 @@ RSpec.describe Dealer do
 
       it 'fails' do
         expect(delivery).not_to be_success
-        expect{delivery.value!}.to raise_error Dry::Monads::UnwrapError
+        expect { delivery.value! }.to raise_error Dry::Monads::UnwrapError
         expect(delivery.value_or('default value')).to eq 'default value'
         expect(delivery.success?).to eq false
         expect(delivery.failure?).to eq true
