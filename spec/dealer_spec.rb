@@ -11,6 +11,10 @@ RSpec.describe Dealer do
         expect(delivery.failure?).to eq true
         expect(delivery.failure).to eq 'We have no cars manufactured in year 1900'
       end
+
+      # using Success/Failure in spec require Dry::Monads[:result] to be included
+      include Dry::Monads[:result]
+      it { is_expected.to eql Failure('We have no cars manufactured in year 1900') }
     end
 
     context 'when car is available' do
