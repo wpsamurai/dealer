@@ -25,6 +25,7 @@ RSpec.describe Dealer do
         expect(delivery.success?).to eq true
         expect(delivery.value!).to be_kind_of Car
         expect(delivery.value_or).to be_kind_of Car
+        expect(delivery.value_or('default value')).to be_kind_of Car
         expect(delivery.failure?).to eq false
       end
     end
