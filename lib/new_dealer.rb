@@ -9,10 +9,14 @@ class NewDealer
     yield check_model(model)
     yield check_city(city)
 
-    Success(Car.new(year, model))
+    Success(prepare_car(year, model))
   end
 
   private
+
+    def prepare_car(year, model)
+      Car.new(year, model)
+    end
 
     def check_year(year)
       year < 2000 ? Failure("We have no cars manufactured in year #{year}") : Success('Cars of this year are available')

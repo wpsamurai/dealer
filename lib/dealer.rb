@@ -9,10 +9,14 @@ class Dealer
     return Failure('The model requested is unavailable') unless model_available?(model)
     return Failure('Apologies, we cannot deliver to this city') unless city_available?(city)
 
-    Success(Car.new(year, model))
+    Success(prepare_car(year, model))
   end
 
   private
+
+    def prepare_car(year, model)
+      Car.new(year, model)
+    end
 
     def model_available?(model)
       AVAILABLE_MODELS.include?(model)
