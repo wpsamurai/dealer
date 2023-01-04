@@ -1,4 +1,4 @@
-RSpec.describe Dealer do
+RSpec.describe DoDealer do
   describe '#deliver' do
     context 'when car is too old' do
       subject(:delivery) { described_class.new.deliver(1900, 'focus', 'london') }

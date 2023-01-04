@@ -1,10 +1,12 @@
-class NewDealer
+# An example class with "do" notation
+# https://dry-rb.org/gems/dry-monads/1.3/do-notation/
+class DoDealer
   AVAILABLE_MODELS = %w[corolla focus mondeo].freeze
   AVAILABLE_CITIES = %w[paris london warsaw].freeze
 
   include Dry::Monads[:result, :do]
 
-  def delivery(year, model, city)
+  def deliver(year, model, city)
     yield check_year(year)
     yield check_model(model)
     yield check_city(city)
