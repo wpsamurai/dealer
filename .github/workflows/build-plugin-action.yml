@@ -1,0 +1,29 @@
+name: Build plugin
+
+on:
+  release:
+    types:
+      - created
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+
+      - name: Add revision
+        run: git rev-parse HEAD > revision
+
+      - name: Zip files
+        run: cd.. && zip -r release.zip . -x ".git/*" ".github/*"
+
+      - name: List files
+        run: ls -halt
+
+      - name: Add to release
+        uses: AButler/upload-release-assets@v2.0
+        with:
+          files: ../release.zip
+          repo-token: ${{ secrets.GITHUB_TOKEN }}
