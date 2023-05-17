@@ -1,0 +1,36 @@
+name: Build plugin
+
+on:
+  release:
+    types:
+      - created
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+        # Checkout repository
+      - name: Checkout repository
+        uses: actions/checkout@v3
+        with:
+          # checkout repository to directory with a name
+          # you want to be the root directory in the plugin zip archive
+          path: dfwconnector-woocommerce
+
+        # Add file revision with HEAD commit hash
+        # It will allow to keep track of the plugin version
+      - name: Add revision
+        run: cd dfwconnector-woocommerce && git rev-parse HEAD > revision
+
+        # Zip the repository excluding some technical files and directories
+        # (like .github, .git etc, README.md etc)
+      - name: Zip files
+        run: zip -r dfwconnector-woocommerce.zip dfwconnector-woocommerce -x "dfwconnector-woocommerce/.git/*" "dfwconnector-woocommerce/.github/*"
+
+        # Add plugin archive to the release
+      - name: Add plugin archive to the release
+        uses: AButler/upload-release-assets@v2.0
+        with:
+          files: dfwconnector-woocommerce.zip
+          repo-token: ${{ secrets.GITHUB_TOKEN }}
