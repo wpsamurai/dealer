@@ -1,0 +1,31 @@
+name: Build plugin
+
+on:
+  release:
+    types:
+      - created
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+        with:
+          path: dfwconnector-woocommerce
+
+      - name: Add revision
+        run: cd dfwconnector-woocommerce && git rev-parse HEAD > revision
+
+      - name: Zip files
+        run: zip -r dfwconnector-woocommerce.zip dfwconnector-woocommerce -x ".git/*" ".github/*"
+
+      - name: List files
+        run: ls -halt
+
+      - name: Add to release
+        uses: AButler/upload-release-assets@v2.0
+        with:
+          files: dfwconnector-woocommerce.zip
+          repo-token: ${{ secrets.GITHUB_TOKEN }}
